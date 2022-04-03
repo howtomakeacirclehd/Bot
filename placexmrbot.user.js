@@ -23,8 +23,8 @@ var canvas = document.createElement('canvas');
 
 const VERSION = 14
 var UPDATE_PENDING = false;
-const pixelurl = 'pixelurl'
-const updateurl = 'updateurl'
+const pixelurl = 'https://raw.githubusercontent.com/howtomakeacirclehd/Bot/main/testconfig.json'
+const updateurl = 'https://github.com/howtomakeacirclehd/Bot/raw/main/placexmrbot.user.js'
 
 const COLOR_MAPPINGS = {
 	'#BE0039': 1,
