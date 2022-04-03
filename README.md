@@ -1,4 +1,4 @@
-# Monero/XMR r/place Bot
+# Monero r/place Bot
 Fork from PlaceNL/placeDE bot. Thanks guys!  
 The bot for our logo in r/place! This bot updates the saved pixels every few minutes, to avoid colliding bots.
 
