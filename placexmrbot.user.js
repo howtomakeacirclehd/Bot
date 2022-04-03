@@ -7,7 +7,7 @@
 // @match        https://www.reddit.com/r/place/*
 // @match        https://new.reddit.com/r/place/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=reddit.com
-// @require	     https://cdn.jsdelivr.net/npm/toastify-js
+// @require	 https://cdn.jsdelivr.net/npm/toastify-js
 // @resource     TOASTIFY_CSS https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css
 // @updateURL    https://github.com/PlaceDE/Bot/raw/main/placedebot.user.js
 // @downloadURL  https://github.com/PlaceDE/Bot/raw/main/placedebot.user.js
@@ -15,7 +15,7 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-// Sorry voor de rommelige code, haast en clean gaatn iet altijd samen ;)
+// Sorry for the untidy code, we didn't have much time ;)
 
 var placeOrders = [];
 var accessToken;
