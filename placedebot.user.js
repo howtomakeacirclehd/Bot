@@ -23,7 +23,8 @@ var canvas = document.createElement('canvas');
 
 const VERSION = 14
 var UPDATE_PENDING = false;
-const pixelurl = 'xyz'
+const pixelurl = 'pixelurl'
+const updateurl = 'updateurl'
 
 const COLOR_MAPPINGS = {
 	'#BE0039': 1,
@@ -59,12 +60,12 @@ const COLOR_MAPPINGS = {
 	canvas = document.body.appendChild(canvas);
 
 	Toastify({
-		text: 'Abfrage des Zugriffstokens...',
+		text: 'getting accesstoken...',
 		duration: 10000
 	}).showToast();
 	accessToken = await getAccessToken();
 	Toastify({
-		text: 'Zugriffstoken eingesammelt!',
+		text: 'Token collected!',
 		duration: 10000
 	}).showToast();
 
@@ -96,9 +97,9 @@ async function attemptPlace() {
 		ctx = await getCanvasFromUrl(await getCurrentImageUrl('0'), canvas, 0, 0);
 		ctx = await getCanvasFromUrl(await getCurrentImageUrl('1'), canvas, 1000, 0)
 	} catch (e) {
-		console.warn('Fehler beim Abrufen der Zeichenfläche:', e);
+		console.warn('Error while fetching the canvas:', e);
 		Toastify({
-			text: 'Fehler beim Abrufen der Zeichenfläche. Neuer Versuch in 15 Sekunden...',
+			text: 'Error while fetching the canvas. Next try in 15 seconds...',
 			duration: 10000
 		}).showToast();
 		setTimeout(attemptPlace, 15000); // probeer opnieuw in 15sec.
@@ -119,7 +120,7 @@ async function attemptPlace() {
 		if (currentColorId == colorId) continue;
 
 		Toastify({
-			text: `Pixel wird gesetzt auf ${x}, ${y}...`,
+			text: `Pixel is placed at ${x}, ${y}...`,
 			duration: 10000
 		}).showToast();
 
@@ -149,7 +150,7 @@ async function attemptPlace() {
 
 function updateOrders() {
 	fetch(pixelurl, {cache: "no-store"}).then(async (response) => {
-		if (!response.ok) return console.warn('Bestellungen können nicht geladen werden!');
+		if (!response.ok) return console.warn('Could not load orders!');
 		const data = await response.json();
 
 		if (JSON.stringify(data) !== JSON.stringify(placeOrders)) {
@@ -167,17 +168,17 @@ function updateOrders() {
 		if (data?.version !== VERSION && !UPDATE_PENDING) {
 			UPDATE_PENDING = true
 			Toastify({
-				text: `NEUE VERSION VERFÜGBAR! Aktualisiere hier https://github.com/placeDE/Bot/raw/main/placedebot.user.js`,
+				text: `New version available! Click to update`,
 				duration: -1,
 				onClick: () => {
 					// Tapermonkey captures this and opens a new tab
-					window.location = 'https://github.com/placeDE/Bot/raw/main/placedebot.user.js'
+					window.location = updateurl
 				}
 			}).showToast();
 
 		}
 		placeOrders = data;
-	}).catch((e) => console.warn('Bestellungen können nicht geladen werden!', e));
+	}).catch((e) => console.warn('Unable to load orders!', e));
 }
 
 /**
@@ -241,7 +242,7 @@ async function place(x, y, color) {
 	const data = await response.json()
 	if (data.errors != undefined) {
 		Toastify({
-			text: 'Fehler beim Platzieren des Pixels, warte auf Abkühlzeit...',
+			text: 'Placing pixel failed, waiting for cooldown...',
 			duration: 10000
 		}).showToast();
 		return data.errors[0].extensions?.nextAvailablePixelTs
