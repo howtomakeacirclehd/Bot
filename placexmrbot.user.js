@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PlaceDE Bot
 // @namespace    https://github.com/PlaceDE/Bot
-// @version      14
+// @version      16
 // @description  /r/place bot
 // @author       NoahvdAa, reckter, SgtChrome, nama17
 // @match        https://www.reddit.com/r/place/*
@@ -21,33 +21,41 @@ var placeOrders = [];
 var accessToken;
 var canvas = document.createElement('canvas');
 
-const VERSION = 14
+const VERSION = 16
 var UPDATE_PENDING = false;
 const pixelurl = 'https://raw.githubusercontent.com/howtomakeacirclehd/Bot/main/testconfig.json'
 const updateurl = 'https://github.com/howtomakeacirclehd/Bot/raw/main/placexmrbot.user.js'
 
 const COLOR_MAPPINGS = {
+	'#6D001A': 0,
 	'#BE0039': 1,
 	'#FF4500': 2,
 	'#FFA800': 3,
 	'#FFD635': 4,
+	'#FFF8B8': 5,
 	'#00A368': 6,
 	'#00CC78': 7,
 	'#7EED56': 8,
 	'#00756F': 9,
 	'#009EAA': 10,
+	'#00CCC0': 11,
 	'#2450A4': 12,
 	'#3690EA': 13,
 	'#51E9F4': 14,
 	'#493AC1': 15,
 	'#6A5CFF': 16,
+	'#94B3FF': 17,
 	'#811E9F': 18,
 	'#B44AC0': 19,
+	'#E4ABFF': 20,
+	'#DE107F': 21,
 	'#FF3881': 22,
 	'#FF99AA': 23,
 	'#6D482F': 24,
 	'#9C6926': 25,
+	'#FFB470': 26,
 	'#000000': 27,
+	'#515252': 28,
 	'#898D90': 29,
 	'#D4D7D9': 30,
 	'#FFFFFF': 31
@@ -186,10 +194,7 @@ function updateOrders() {
 
 
 function getCanvasId(x,y) {
-	if(x <= 999 && y <= 999) return 0
-	if(x > 999 && y <= 999) return 1
-	if(x >= 999 && y > 999) return 2
-	if(x >= 999 && y > 999) return 3
+	return (x <1000) + (y<1000)*2
 
 }
 /**
