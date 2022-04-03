@@ -23,6 +23,7 @@ var canvas = document.createElement('canvas');
 
 const VERSION = 14
 var UPDATE_PENDING = false;
+const pixelurl = 'xyz'
 
 const COLOR_MAPPINGS = {
 	'#BE0039': 1,
@@ -147,7 +148,7 @@ async function attemptPlace() {
 }
 
 function updateOrders() {
-	fetch(`https://placede.github.io/pixel/pixel.json`, {cache: "no-store"}).then(async (response) => {
+	fetch(pixelurl, {cache: "no-store"}).then(async (response) => {
 		if (!response.ok) return console.warn('Bestellungen können nicht geladen werden!');
 		const data = await response.json();
 
